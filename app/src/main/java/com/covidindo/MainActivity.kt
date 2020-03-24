@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.covidindo.viewModel.DataViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_splash.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +22,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupObserver() {
         viewModel.getData().observe(this, Observer {
-            val a = it
+            if (it != null) {
+                val a = it
+                textView1.text = "Total Cases: ${it.totalcases.toString()}"
+                textView2.text = "Confirmed Death : ${it.confirmedDead.toString()}"
+                textView3.text = "Confirmed Healed : ${it.confirmedHealed.toString()}"
+            }
         })
     }
 }
