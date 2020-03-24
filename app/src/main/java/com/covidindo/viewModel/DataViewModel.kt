@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.covidindo.model.CovidModel
+import com.covidindo.model.ListMovieWrapper
 import com.covidindo.repository.DataRepository
 import kotlinx.coroutines.async
 
@@ -14,9 +14,9 @@ class DataViewModel(
     val repository: DataRepository
 ) : AndroidViewModel(context) {
 
-    val getMovieEvent = repository.getCovidModelEvent
+    val getMovieEvent = repository.getListMovieWrapperEvent
 
-    private val covid = MutableLiveData<CovidModel>()
+    private val covid = MutableLiveData<ListMovieWrapper>()
 
     fun getMovie() {
         viewModelScope.async {
@@ -24,7 +24,7 @@ class DataViewModel(
         }
     }
 
-    fun getMovieData(): LiveData<CovidModel?> {
+    fun getMovieData(): LiveData<ListMovieWrapper?> {
         return covid
     }
 }

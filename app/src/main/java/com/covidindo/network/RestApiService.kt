@@ -7,7 +7,7 @@ import retrofit2.http.GET
 
 interface RestApiService {
 
-    @GET("latest?iso2=ID/")
+    @GET("latest?iso2=ID")
     fun popularMovie(): Call<List<ListMovieWrapper>>
 
 }
