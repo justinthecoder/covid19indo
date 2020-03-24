@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.covidindo.util.Status
 import com.covidindo.viewModel.DataViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -29,8 +30,10 @@ class MainActivity : AppCompatActivity() {
                     //TODO: Show progress bar
                 }
                 Status.SUCCESS -> {
-                    it.data?.let {
-                        //TODO: Show UI here
+                    it.data?.let { result ->
+                        textView1.text = "Total Cases: ${result.totalcases.toString()}"
+                        textView2.text = "Confirmed Death : ${result.confirmedDead.toString()}"
+                        textView3.text = "Confirmed Healed : ${result.confirmedHealed.toString()}"
                     }
                 }
             }
