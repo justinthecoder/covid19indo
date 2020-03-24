@@ -7,7 +7,6 @@ import com.covidindo.util.Resource
 import com.covidindo.util.SingleLiveEvent
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 /**
@@ -16,8 +15,8 @@ import kotlin.coroutines.suspendCoroutine
 class DataRepository(val context: Application) {
 
     val getCovidDataEvent = SingleLiveEvent<Resource<CovidModel>>()
-    suspend fun getCovidData(): CovidModel {
-        return suspendCoroutine { cont ->
+    suspend fun getCovidData() {
+        return suspendCoroutine {
             getCovidDataEvent.postValue(Resource.loading())
             val apiService = RetrofitInstance.getApiService
             val call = apiService.getCovidDataInIndonesia()
@@ -35,7 +34,6 @@ class DataRepository(val context: Application) {
                     if (!result.isNullOrEmpty()) {
                         val covidModel = result[0]
                         getCovidDataEvent.postValue(Resource.success(covidModel))
-                        cont.resume(covidModel)
                     } else {
                         getCovidDataEvent.postValue(Resource.error("wkwkwk"))
                     }
