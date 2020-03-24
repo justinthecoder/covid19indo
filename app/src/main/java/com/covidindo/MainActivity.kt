@@ -23,15 +23,14 @@ class MainActivity : AppCompatActivity() {
         viewModel.getCovidDataEvent.observe(this, Observer {
             when (it.status) {
                 Status.ERROR -> {
-
+                    //TODO: Show error message
                 }
                 Status.LOADING -> {
-                    val a = "x"
                     //TODO: Show progress bar
                 }
                 Status.SUCCESS -> {
                     it.data?.let {
-
+                        //TODO: Show UI here
                     }
                 }
             }
