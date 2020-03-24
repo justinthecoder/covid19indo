@@ -14,17 +14,19 @@ class DataViewModel(
     val repository: DataRepository
 ) : AndroidViewModel(context) {
 
-    val getMovieEvent = repository.getCovidModelEvent
+    val getCovidDataEvent = repository.getCovidDataEvent
 
     private val covid = MutableLiveData<CovidModel>()
 
-    fun getMovie() {
+    fun triggerFetchFromBackend() {
         viewModelScope.async {
-            covid.postValue(repository.getMovieList())
+            val a = repository.getCovidData()
+            val b = a
+            covid.postValue(b)
         }
     }
 
-    fun getMovieData(): LiveData<CovidModel?> {
+    fun getData(): LiveData<CovidModel?> {
         return covid
     }
 }

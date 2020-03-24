@@ -14,12 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.getMovie()
+        viewModel.triggerFetchFromBackend()
         setupObserver()
     }
 
     private fun setupObserver() {
-        viewModel.getMovieData().observe(this, Observer {
+        viewModel.getData().observe(this, Observer {
             val a = it
         })
     }
