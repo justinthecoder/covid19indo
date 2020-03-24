@@ -3,6 +3,7 @@ package com.covidindo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.covidindo.util.Status
 import com.covidindo.viewModel.DataViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -19,8 +20,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-        viewModel.getData().observe(this, Observer {
-            val a = it
+        viewModel.getCovidDataEvent.observe(this, Observer {
+            when (it.status) {
+                Status.ERROR -> {
+
+                }
+                Status.LOADING -> {
+                    val a = "x"
+                    //TODO: Show progress bar
+                }
+                Status.SUCCESS -> {
+                    it.data?.let {
+
+                    }
+                }
+            }
         })
     }
 }
