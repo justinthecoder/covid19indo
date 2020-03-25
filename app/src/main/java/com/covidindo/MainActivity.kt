@@ -46,9 +46,9 @@ class MainActivity : AppCompatActivity() {
                     content_wrapper.visibility = View.VISIBLE
                     refresh_layout.isRefreshing = false
                     it.data?.let { result ->
-                        textView1.text = "Total Cases: ${result.totalcases.toString()}"
-                        textView2.text = "Confirmed Death : ${result.confirmedDead.toString()}"
-                        textView3.text = "Confirmed Healed : ${result.confirmedHealed.toString()}"
+                        textView1.text = "Total Kasus: ${resul  t.totalcases.toString()}"
+                        textView2.text = "Total Meninggal: ${result.confirmedDead.toString()}"
+                        textView3.text = "Total Sembuh: ${result.confirmedHealed.toString()}"
                     }
                 }
             }
