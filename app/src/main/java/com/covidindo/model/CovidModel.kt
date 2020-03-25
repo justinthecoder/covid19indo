@@ -6,10 +6,12 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class CovidModel(
-    @SerializedName("confirmed")
+    @SerializedName("cases")
     val totalcases: Int,
     @SerializedName("deaths")
     val confirmedDead: Int,
     @SerializedName("recovered")
-    val confirmedHealed: Int
+    val confirmedHealed: Int,
+    @SerializedName("active")
+    val confirmedActive: Int
 ) : Parcelable
