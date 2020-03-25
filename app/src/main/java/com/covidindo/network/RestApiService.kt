@@ -8,6 +8,6 @@ import retrofit2.http.GET
 interface RestApiService {
 
     @GET("indonesia")
-    fun getCovidDataInIndonesia(): Call<List<CovidModel>>
+    fun getCovidDataInIndonesia(): Call<CovidModel>
 
 }
