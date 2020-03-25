@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
 
     private var retrofit: Retrofit? = null
-    val BASE_URL = "https://corona.lmao.ninja/countries"
+    val BASE_URL = "https://corona.lmao.ninja/countries/"
 
     val getApiService: RestApiService
         get() {

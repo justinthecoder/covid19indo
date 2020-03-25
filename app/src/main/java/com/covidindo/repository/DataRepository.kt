@@ -5,6 +5,7 @@ import com.covidindo.model.CovidModel
 import com.covidindo.network.RetrofitInstance
 import com.covidindo.util.Resource
 import com.covidindo.util.SingleLiveEvent
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.coroutines.suspendCoroutine
@@ -21,19 +22,15 @@ class DataRepository(val context: Application) {
             val apiService = RetrofitInstance.getApiService
             val call = apiService.getCovidDataInIndonesia()
 
-            call.enqueue(object : Callback<List<CovidModel>> {
-                override fun onFailure(call: retrofit2.Call<List<CovidModel>>, t: Throwable) {
+            call.enqueue(object : Callback<CovidModel> {
+                override fun onFailure(call: Call<CovidModel>, t: Throwable) {
                     getCovidDataEvent.postValue(Resource.error("something went wrong"))
                 }
 
-                override fun onResponse(
-                    call: retrofit2.Call<List<CovidModel>>,
-                    response: Response<List<CovidModel>>
-                ) {
+                override fun onResponse(call: Call<CovidModel>, response: Response<CovidModel>) {
                     val result = response.body()
-                    if (!result.isNullOrEmpty()) {
-                        val covidModel = result[0]
-                        getCovidDataEvent.postValue(Resource.success(covidModel))
+                    if (result != null) {
+                        getCovidDataEvent.postValue(Resource.success(result))
                     } else {
                         getCovidDataEvent.postValue(Resource.error("wkwkwk"))
                     }
