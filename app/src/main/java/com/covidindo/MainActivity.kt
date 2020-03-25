@@ -1,6 +1,8 @@
 package com.covidindo
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.covidindo.util.Status
@@ -17,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         viewModel.triggerFetchFromBackend()
+        refresh_layout.isRefreshing = true
+        refresh_layout.setOnRefreshListener {
+            viewModel.triggerFetchFromBackend()
+        }
         setupObserver()
     }
 
@@ -24,12 +30,21 @@ class MainActivity : AppCompatActivity() {
         viewModel.getCovidDataEvent.observe(this, Observer {
             when (it.status) {
                 Status.ERROR -> {
-                    //TODO: Show error message
+                    refresh_layout.isRefreshing = false
+                    content_wrapper.visibility = View.GONE
+                    Toast.makeText(
+                        this,
+                        "Sedang terjadi kesalahan... Data tidak dapat diambil",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 Status.LOADING -> {
-                    //TODO: Show progress bar
+                    content_wrapper.visibility = View.GONE
+                    refresh_layout.isRefreshing = true
                 }
                 Status.SUCCESS -> {
+                    content_wrapper.visibility = View.VISIBLE
+                    refresh_layout.isRefreshing = false
                     it.data?.let { result ->
                         textView1.text = "Total Cases: ${result.totalcases.toString()}"
                         textView2.text = "Confirmed Death : ${result.confirmedDead.toString()}"
