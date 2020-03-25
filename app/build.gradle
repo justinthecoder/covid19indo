@@ -18,8 +18,22 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            manifestPlaceholders = [appProviderSuffix   : "",
+                                    enableCrashReporting: "false"]
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "APP_PROVIDER_SUFFIX", '""'
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            manifestPlaceholders = [appProviderSuffix   : ".debug",
+                                    enableCrashReporting: "false"]
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "APP_PROVIDER_SUFFIX", '".debug"'
         }
     }
 
