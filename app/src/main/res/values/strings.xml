@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">COVID 19 Indonesia</string>
-    <string name="total_cases">TOTAL CASES</string>
+    <string name="total_cases">TOTAL KASUS</string>
+    <string name="confirmed_deaths">TOTAL MENINGGAL</string>
+    <string name="confirmed_healed">TOTAL SEMBUH</string>
     <string name="number_of_cases"></string>
 </resources>
